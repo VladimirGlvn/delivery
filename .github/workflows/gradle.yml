@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      actions: read
+      checks: write
 
     steps:
     - uses: actions/checkout@v4
@@ -38,6 +40,7 @@ jobs:
 
     - name: Test Reporter
       uses: dorny/test-reporter@v1.9.1
+      if: success() || failure()
       with:
         name: Tests
         path: core/build/test-results/test/*.xml
