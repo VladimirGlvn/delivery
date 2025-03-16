@@ -14,7 +14,7 @@ import java.util.*
 @DisplayName("Order should")
 class OrderTest {
 
-    private val courier = Courier()
+    private val courier = Courier("Ivan", transportName = "car", transportSpeed = 3, location = Location.random())
 
     @Test
     fun `have CREATED status when just created`() {
