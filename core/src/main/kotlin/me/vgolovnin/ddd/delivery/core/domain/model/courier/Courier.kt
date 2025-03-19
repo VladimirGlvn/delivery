@@ -12,7 +12,7 @@ class Courier(
     location: Location,
 ) {
     val id: UUID = UUID.randomUUID()
-    val isFree: Boolean = true
+    var isFree: Boolean = true
     private val transport = Transport(transportName, transportSpeed)
 
     var location: Location = location
