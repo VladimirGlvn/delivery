@@ -1,7 +1,11 @@
 package me.vgolovnin.ddd.delivery.core.domain.model.order
 
+import arrow.core.Either
+import arrow.core.raise.either
+import arrow.core.raise.ensure
 import me.vgolovnin.ddd.delivery.core.domain.model.courier.Courier
 import me.vgolovnin.ddd.delivery.core.domain.model.order.OrderStatus.*
+import me.vgolovnin.ddd.delivery.core.domain.sharedkernel.Fault
 import me.vgolovnin.ddd.delivery.core.domain.sharedkernel.Location
 import java.util.*
 
@@ -15,16 +19,20 @@ class Order(
     var courierId: UUID? = null
         private set
 
-    fun assignTo(courier: Courier) {
-        check(status != COMPLETED) { "Completed order cannot be assigned" }
+    fun assignTo(courier: Courier): Either<Fault, Unit> = either {
+        ensure(status == CREATED) { Faults.AlreadyAssigned }
 
         courierId = courier.id
         status = ASSIGNED
     }
 
-    fun complete() {
-        check(status == ASSIGNED || status == COMPLETED) { "Order cannot be completed if it is not assigned" }
+    fun complete(): Either<Fault, Unit> = either {
+        ensure(status == ASSIGNED || status == COMPLETED) { Faults.NotAssignedYet }
         status = COMPLETED
     }
 
+    object Faults {
+        object AlreadyAssigned : Fault
+        object NotAssignedYet : Fault
+    }
 }
