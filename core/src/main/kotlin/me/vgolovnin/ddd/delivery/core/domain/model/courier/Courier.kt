@@ -10,10 +10,10 @@ class Courier(
     transportName: String,
     transportSpeed: Int,
     location: Location,
+    var isFree: Boolean = true,
+    val id: UUID = UUID.randomUUID(),
 ) {
-    val id: UUID = UUID.randomUUID()
-    var isFree: Boolean = true
-    private val transport = Transport(transportName, transportSpeed)
+    val transport = Transport(transportName, transportSpeed)
 
     var location: Location = location
         private set
@@ -22,5 +22,18 @@ class Courier(
 
     fun moveTo(target: Location) {
         location = with(transport) { go(location to target) }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Courier
+
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
     }
 }
