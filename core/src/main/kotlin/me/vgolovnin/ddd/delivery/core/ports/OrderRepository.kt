@@ -10,4 +10,5 @@ interface OrderRepository {
     fun findById(id: UUID): Order?
     fun findFirstNotDispatched(): Order?
     fun findAll(): Iterable<Order>
+    fun findAllAssigned(): Iterable<Order>
 }

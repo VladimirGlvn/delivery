@@ -7,4 +7,5 @@ import java.util.*
 internal interface JdbcOrderRepository: CrudRepository<OrderRecord, UUID> {
 
     fun findFirstByStatus(status: OrderStatus): Optional<OrderRecord>
+    fun findAllByStatus(status: OrderStatus): Iterable<OrderRecord>
 }

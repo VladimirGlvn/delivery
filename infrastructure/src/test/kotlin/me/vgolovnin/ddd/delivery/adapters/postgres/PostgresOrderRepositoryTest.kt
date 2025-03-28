@@ -115,4 +115,22 @@ class PostgresOrderRepositoryTest {
         assertThat(found).containsExactlyInAnyOrderElementsOf(givenOrders)
     }
 
+    @Test
+    @DisplayName("find all assigned orders")
+    fun findAllAssignedOrders() {
+        val vlad = Courier("vlad", "bus", 2, Location.random())
+        courierRepository.add(vlad)
+
+        val assignedOrders = listOf(
+            Order(UUID.randomUUID(), Location.random()).apply { assignTo(courier) },
+            Order(UUID.randomUUID(), Location.random()).apply { assignTo(vlad) }
+        )
+        assignedOrders.forEach { orderRepository.add(it) }
+        orderRepository.add(Order(UUID.randomUUID(), Location.random()))
+
+        val found = orderRepository.findAllAssigned()
+
+        assertThat(found).containsExactlyInAnyOrderElementsOf(assignedOrders)
+    }
+
 }

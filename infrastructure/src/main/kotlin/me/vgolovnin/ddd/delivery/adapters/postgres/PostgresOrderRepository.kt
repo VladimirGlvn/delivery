@@ -29,6 +29,9 @@ internal class PostgresOrderRepository(
     override fun findFirstNotDispatched(): Order? =
         jdbcOrderRepository.findFirstByStatus(OrderStatus.CREATED).map(::toEntity).getOrNull()
 
+    override fun findAllAssigned(): Iterable<Order> =
+        jdbcOrderRepository.findAllByStatus(OrderStatus.ASSIGNED).map(::toEntity)
+
     override fun findAll(): Iterable<Order> = jdbcOrderRepository.findAll().map(::toEntity)
 
     private fun toEntity(record: OrderRecord) = with(record) {
