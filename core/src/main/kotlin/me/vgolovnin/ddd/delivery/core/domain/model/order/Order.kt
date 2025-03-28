@@ -12,11 +12,13 @@ import java.util.*
 class Order(
     val id: UUID,
     val location: Location,
+    status: OrderStatus = CREATED,
+    courierId: UUID? = null,
 ) {
-    var status: OrderStatus = CREATED
+    var status: OrderStatus = status
         private set
 
-    var courierId: UUID? = null
+    var courierId: UUID? = courierId
         private set
 
     fun assignTo(courier: Courier): Either<Fault, Unit> = either {
@@ -30,6 +32,17 @@ class Order(
         ensure(status == ASSIGNED || status == COMPLETED) { Faults.NotAssignedYet }
         status = COMPLETED
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Order
+
+        return id == other.id
+    }
+
+    override fun hashCode(): Int = id.hashCode()
 
     object Faults {
         object AlreadyAssigned : Fault

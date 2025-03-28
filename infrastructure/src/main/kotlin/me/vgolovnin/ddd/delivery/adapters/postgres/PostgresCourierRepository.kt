@@ -6,7 +6,7 @@ import me.vgolovnin.ddd.delivery.core.ports.CourierRepository
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
-class PostgresCourierRepository(
+internal class PostgresCourierRepository(
     private val jdbcRepository: JdbcCourierRepository
 ) : CourierRepository {
 
