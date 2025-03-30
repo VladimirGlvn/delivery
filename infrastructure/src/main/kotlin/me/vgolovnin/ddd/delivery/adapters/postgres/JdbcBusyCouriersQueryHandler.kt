@@ -1,6 +1,6 @@
 package me.vgolovnin.ddd.delivery.adapters.postgres
 
-import me.vgolovnin.ddd.delivery.core.application.usecases.*
+import me.vgolovnin.ddd.delivery.core.application.usecases.query.*
 
 internal class JdbcBusyCouriersQueryHandler(
     private val courierRepository: JdbcCourierRepository
