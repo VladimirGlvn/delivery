@@ -1,4 +1,4 @@
-package me.vgolovnin.ddd.delivery.core.application.usecases
+package me.vgolovnin.ddd.delivery.core.application.usecases.command
 
 import me.vgolovnin.ddd.delivery.core.ports.CourierRepository
 import me.vgolovnin.ddd.delivery.core.ports.OrderRepository

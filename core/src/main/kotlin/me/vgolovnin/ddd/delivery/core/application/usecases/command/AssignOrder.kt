@@ -1,4 +1,4 @@
-package me.vgolovnin.ddd.delivery.core.application.usecases
+package me.vgolovnin.ddd.delivery.core.application.usecases.command
 
 import arrow.core.Either
 import arrow.core.raise.either
