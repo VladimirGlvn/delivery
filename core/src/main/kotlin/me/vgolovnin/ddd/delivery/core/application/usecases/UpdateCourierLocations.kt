@@ -4,6 +4,8 @@ import me.vgolovnin.ddd.delivery.core.ports.CourierRepository
 import me.vgolovnin.ddd.delivery.core.ports.OrderRepository
 import me.vgolovnin.ddd.delivery.core.utils.UnitOfWork
 
+object UpdateCourierLocationsCommand
+
 class UpdateCourierLocationsHandler(
     private val courierRepository: CourierRepository,
     private val orderRepository: OrderRepository,
