@@ -4,9 +4,11 @@ import me.vgolovnin.ddd.delivery.core.domain.model.order.Order
 import me.vgolovnin.ddd.delivery.core.domain.model.order.OrderStatus
 import me.vgolovnin.ddd.delivery.core.domain.sharedkernel.Location
 import me.vgolovnin.ddd.delivery.core.ports.OrderRepository
+import org.springframework.stereotype.Repository
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
+@Repository
 internal class PostgresOrderRepository(
     private val jdbcOrderRepository: JdbcOrderRepository
 ) : OrderRepository {

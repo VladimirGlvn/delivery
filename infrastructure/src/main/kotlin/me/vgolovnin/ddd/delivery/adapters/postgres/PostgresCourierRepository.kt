@@ -3,9 +3,11 @@ package me.vgolovnin.ddd.delivery.adapters.postgres
 import me.vgolovnin.ddd.delivery.core.domain.model.courier.Courier
 import me.vgolovnin.ddd.delivery.core.domain.sharedkernel.Location
 import me.vgolovnin.ddd.delivery.core.ports.CourierRepository
+import org.springframework.stereotype.Repository
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
+@Repository
 internal class PostgresCourierRepository(
     private val jdbcRepository: JdbcCourierRepository
 ) : CourierRepository {
