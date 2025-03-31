@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     api("io.arrow-kt:arrow-core:2.0.1")
+    api("dev.ceviz:kordinator:1.0.0")
 
     testImplementation(kotlin("test"))
     testImplementation("io.kotest.extensions:kotest-assertions-arrow:2.0.0")
