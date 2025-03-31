@@ -42,7 +42,6 @@ openApiGenerate {
     generateModelTests = false
     generateApiDocumentation = false
     generateModelDocumentation = false
-    ignoreFileOverride = "$projectDir/.openapi-generator-ignore"
     supportingFilesConstrainedTo = listOf()
     modelPackage = "me.vgolovnin.ddd.delivery.api.adapters.http"
     apiPackage = "me.vgolovnin.ddd.delivery.api.adapters.http"
@@ -51,7 +50,6 @@ openApiGenerate {
         "interfaceOnly" to "true",
         "exceptionHandler" to "false",
         "gradleBuildFile" to "false",
-        "pomFile" to "false",
         "skipDefaultInterface" to "true",
         "useSpringBoot3" to "true",
         "useTags" to "true",

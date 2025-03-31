@@ -4,3 +4,5 @@ pom.xml
 gradlew.bat
 gradlew
 build.gradle.kts
+src/main/kotlin/**/SpringDocConfiguration.kt
+src/main/kotlin/**/ApiUtil.kt
