@@ -5,12 +5,10 @@ import kotlinx.coroutines.runBlocking
 import me.vgolovnin.ddd.delivery.core.application.usecases.command.AssignOrderCommand
 import me.vgolovnin.ddd.delivery.core.application.usecases.command.NoSuitableCouriersException
 import org.slf4j.LoggerFactory
-import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
 @Component
-@EnableScheduling
 class AssignOrdersJob(
     private val mediator: Mediator
 ) {

@@ -1,4 +1,4 @@
-package me.vgolovnin.ddd.delivery.api.config
+package me.vgolovnin.ddd.delivery.api.adapters.job
 
 import me.vgolovnin.ddd.delivery.core.application.usecases.command.AssignOrderHandler
 import me.vgolovnin.ddd.delivery.core.domain.services.Dispatcher
