@@ -7,11 +7,13 @@ import me.vgolovnin.ddd.delivery.core.application.usecases.query.AllCouriersQuer
 import me.vgolovnin.ddd.delivery.core.application.usecases.query.IncompleteOrdersQuery
 import org.apache.commons.lang3.RandomStringUtils
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 import java.util.*
 
 @RestController
+@CrossOrigin
 class DeliveryApiImpl(
     private val mediator: Mediator
 ) : DeliveryApi {
