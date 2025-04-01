@@ -8,6 +8,7 @@ import io.mockk.junit5.MockKExtension
 import io.mockk.just
 import io.mockk.runs
 import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import me.vgolovnin.ddd.delivery.core.domain.model.courier.Courier
 import me.vgolovnin.ddd.delivery.core.domain.model.order.Order
 import me.vgolovnin.ddd.delivery.core.domain.model.order.OrderStatus
@@ -46,7 +47,7 @@ class UpdateCourierLocationsHandlerTest {
 
     @Test
     @DisplayName("Update assigned courier location by one step")
-    fun `update courier location by one step`() {
+    fun `update courier location by one step`() = runTest {
         val courier = Courier("alex", "bicycle", 1, Location(1, 1)).apply { isFree = false }
         val order = Order(UUID.randomUUID(), Location(3, 1)).also { it.assignTo(courier) }
         every { orderRepository.findAllAssigned() } returns listOf(order)
@@ -62,7 +63,7 @@ class UpdateCourierLocationsHandlerTest {
 
     @Test
     @DisplayName("Complete order if courier is at order's location")
-    fun `complete order`() {
+    fun `complete order`() = runTest {
         val courier = Courier("alex", "bicycle", 1, Location(1, 1)).apply { isFree = false }
         val order = Order(UUID.randomUUID(), Location(2, 1)).also { it.assignTo(courier) }
         every { orderRepository.findAllAssigned() } returns listOf(order)
