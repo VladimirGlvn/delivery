@@ -4,6 +4,7 @@ import dev.ceviz.Mediator
 import kotlinx.coroutines.runBlocking
 import me.vgolovnin.ddd.delivery.core.application.usecases.command.CreateOrderCommand
 import me.vgolovnin.ddd.delivery.core.application.usecases.query.AllCouriersQuery
+import me.vgolovnin.ddd.delivery.core.application.usecases.query.IncompleteOrdersQuery
 import org.apache.commons.lang3.RandomStringUtils
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
@@ -27,7 +28,10 @@ class DeliveryApiImpl(
         ResponseEntity.ok(couriers.map { Courier(it.id, it.name, Location(it.location.x, it.location.y)) })
     }
 
-    override fun getOrders(): ResponseEntity<List<Order>> {
-        TODO("Not yet implemented")
+    override fun getOrders(): ResponseEntity<List<Order>> = runBlocking {
+        val orders = mediator.send(IncompleteOrdersQuery).orders
+        ResponseEntity.ok(orders.map {
+            Order(it.id, Location(it.location.x, it.location.y))
+        })
     }
 }
