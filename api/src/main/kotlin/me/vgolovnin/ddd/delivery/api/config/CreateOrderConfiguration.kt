@@ -1,6 +1,7 @@
 package me.vgolovnin.ddd.delivery.api.config
 
 import me.vgolovnin.ddd.delivery.core.application.usecases.command.CreateOrderHandler
+import me.vgolovnin.ddd.delivery.core.ports.GeoGateway
 import me.vgolovnin.ddd.delivery.core.ports.OrderRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,5 +10,6 @@ import org.springframework.context.annotation.Configuration
 class CreateOrderConfiguration {
 
     @Bean
-    fun createOrderHandler(orderRepository: OrderRepository) = CreateOrderHandler(orderRepository)
+    fun createOrderHandler(orderRepository: OrderRepository, geoGateway: GeoGateway) =
+        CreateOrderHandler(orderRepository, geoGateway)
 }
