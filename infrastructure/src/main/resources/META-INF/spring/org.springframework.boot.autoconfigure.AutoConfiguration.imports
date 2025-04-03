@@ -1,2 +1,2 @@
 me.vgolovnin.ddd.delivery.adapters.PersistenceAdaptersAutoConfiguration
-me.vgolovnin.ddd.delivery.adapters.GeoGatewayAutoConfiguration
+me.vgolovnin.ddd.delivery.adapters.grpc.GeoServiceAutoConfiguration

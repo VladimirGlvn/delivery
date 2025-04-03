@@ -3,3 +3,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/delivery
 server:
   port: 8082
+geo:
+  host: localhost:5004
