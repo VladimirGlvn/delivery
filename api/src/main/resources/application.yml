@@ -1,6 +1,12 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/delivery
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: "delivery"
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 server:
   port: 8082
 geo:

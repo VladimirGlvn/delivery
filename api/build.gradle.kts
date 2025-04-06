@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.4.4"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.openapi.generator") version "7.12.0"
+    id("com.google.protobuf") version "0.9.5"
 }
 
 group = "me.vgolovnin.ddd.delivery"
@@ -18,13 +19,16 @@ dependencies {
     implementation(project(":infrastructure"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.kafka:spring-kafka")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("dev.ceviz:spring-3x-kordinator:1.0.0")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+    implementation("com.google.protobuf:protobuf-kotlin:4.30.2")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+    protobuf(files("contracts"))
 
     testImplementation(kotlin("test"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -57,4 +61,10 @@ openApiGenerate {
         "useSpringBoot3" to "true",
         "useTags" to "true",
     )
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.30.2"
+    }
 }

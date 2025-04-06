@@ -1,10 +1,5 @@
 --liquibase formatted sql
 
---changeset vgolovnin:1.1
---comment: Create schema.
-create schema delivery;
---rollback drop schema delivery;
-
 --changeset vgolovnin:1.2
 --comment: Create couriers table.
 create table couriers
