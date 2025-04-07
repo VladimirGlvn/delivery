@@ -21,16 +21,28 @@ class Order(
     var courierId: UUID? = courierId
         private set
 
+    private val _events = mutableListOf<OrderStatusChangeEvent>()
+    val events: List<OrderStatusChangeEvent> by ::_events
+
+    fun clearEvents() {
+        _events.clear()
+    }
+
     fun assignTo(courier: Courier): Either<Fault, Unit> = either {
         ensure(status == CREATED) { Faults.AlreadyAssigned }
 
         courierId = courier.id
-        status = ASSIGNED
+        changeStatus(ASSIGNED)
     }
 
     fun complete(): Either<Fault, Unit> = either {
         ensure(status == ASSIGNED || status == COMPLETED) { Faults.NotAssignedYet }
-        status = COMPLETED
+        changeStatus(COMPLETED)
+    }
+
+    private fun changeStatus(status: OrderStatus) {
+        this.status = status
+        _events += OrderStatusChangeEvent(id, status)
     }
 
     override fun equals(other: Any?): Boolean {
