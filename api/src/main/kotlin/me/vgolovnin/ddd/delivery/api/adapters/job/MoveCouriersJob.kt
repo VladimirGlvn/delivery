@@ -15,7 +15,7 @@ class MoveCouriersJob(
 
     @Scheduled(fixedRate = 2000)
     fun execute() = runBlocking {
-        log.info("Moving couriers")
+        log.debug("Moving couriers")
         mediator.send(UpdateCourierLocationsCommand)
     }
 }

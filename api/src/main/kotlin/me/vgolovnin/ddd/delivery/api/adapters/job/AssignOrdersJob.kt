@@ -17,7 +17,7 @@ class AssignOrdersJob(
     @Scheduled(fixedRate = 1000)
     fun execute() = runBlocking {
         try {
-            log.info("Assigning orders")
+            log.debug("Assigning orders")
             mediator.send(AssignOrderCommand)
         } catch (e: NoSuitableCouriersException) {
             log.warn("No suitable couriers were found to assign orders to.")
