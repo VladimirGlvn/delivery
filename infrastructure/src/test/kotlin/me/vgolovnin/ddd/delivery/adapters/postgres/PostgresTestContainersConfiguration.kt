@@ -1,5 +1,7 @@
 package me.vgolovnin.ddd.delivery.adapters.postgres
 
+import dev.ceviz.Mediator
+import io.mockk.mockk
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
 import org.springframework.context.annotation.Bean
@@ -14,4 +16,7 @@ class PostgresTestContainersConfiguration {
     fun postgresContainer(): PostgreSQLContainer<*> {
         return PostgreSQLContainer(DockerImageName.parse("postgres:alpine"))
     }
+
+    @Bean
+    fun mediator(): Mediator = mockk(relaxed = true)
 }

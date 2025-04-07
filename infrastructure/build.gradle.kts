@@ -21,6 +21,10 @@ dependencies {
     implementation("io.grpc:grpc-kotlin-stub:1.4.1")
     implementation("io.grpc:grpc-protobuf:1.71.0")
     implementation("com.google.protobuf:protobuf-kotlin:4.30.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+    implementation("org.springframework.kafka:spring-kafka:3.3.4")
+
+    compileOnly("com.fasterxml.jackson.core:jackson-databind:2.18.3")
 
     protobuf(files("contracts"))
 
@@ -32,6 +36,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers:3.4.4")
     testImplementation("org.testcontainers:junit-jupiter:1.20.6")
     testImplementation("org.testcontainers:postgresql:1.20.6")
+    testImplementation("io.mockk:mockk:1.13.17")
 }
 
 tasks.test {
