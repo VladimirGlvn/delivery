@@ -1,6 +1,5 @@
 package me.vgolovnin.ddd.delivery.adapters.postgres
 
-import dev.ceviz.Mediator
 import io.mockk.mockk
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection
@@ -9,7 +8,7 @@ import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 
 @TestConfiguration(proxyBeanMethods = false)
-class PostgresTestContainersConfiguration {
+internal class PostgresTestContainersConfiguration {
 
     @Bean
     @ServiceConnection
@@ -18,5 +17,5 @@ class PostgresTestContainersConfiguration {
     }
 
     @Bean
-    fun mediator(): Mediator = mockk(relaxed = true)
+    fun outbox(): Outbox = mockk(relaxed = true)
 }
