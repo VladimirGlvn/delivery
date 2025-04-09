@@ -1,5 +1,7 @@
 package me.vgolovnin.ddd.delivery.adapters.postgres
 
+import dev.ceviz.Mediator
+import kotlinx.coroutines.runBlocking
 import me.vgolovnin.ddd.delivery.core.domain.model.order.Order
 import me.vgolovnin.ddd.delivery.core.domain.model.order.OrderStatus
 import me.vgolovnin.ddd.delivery.core.domain.sharedkernel.Location
@@ -10,23 +12,25 @@ import kotlin.jvm.optionals.getOrNull
 
 @Repository
 internal class PostgresOrderRepository(
-    private val jdbcOrderRepository: JdbcOrderRepository
-) : OrderRepository {
+    private val jdbcOrderRepository: JdbcOrderRepository,
+    private val mediator: Mediator,
+    ) : OrderRepository {
 
     override fun add(order: Order) {
         jdbcOrderRepository.save(
             order.toRecord().also { it.new = true }
         )
+        order.publishEvents()
     }
 
     override fun update(order: Order) {
         jdbcOrderRepository.save(order.toRecord())
+        order.publishEvents()
     }
 
     override fun findById(id: UUID): Order? {
         return jdbcOrderRepository.findById(id).map(::toEntity).getOrNull()
     }
-
 
     override fun findFirstNotDispatched(): Order? =
         jdbcOrderRepository.findFirstByStatus(OrderStatus.CREATED).map(::toEntity).getOrNull()
@@ -41,4 +45,9 @@ internal class PostgresOrderRepository(
     }
 
     private fun Order.toRecord() = OrderRecord(id, location.x, location.y, status, courierId)
+
+    private fun Order.publishEvents() = runBlocking {
+        events.forEach { mediator.send(it) }
+        clearEvents()
+    }
 }
