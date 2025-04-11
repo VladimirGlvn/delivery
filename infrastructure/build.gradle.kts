@@ -23,6 +23,8 @@ dependencies {
     implementation("com.google.protobuf:protobuf-kotlin:4.30.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("org.springframework.kafka:spring-kafka:3.3.4")
+    implementation("com.gruelbox:transactionoutbox-core:6.0.585")
+    implementation("com.gruelbox:transactionoutbox-spring:6.0.585")
 
     compileOnly("com.fasterxml.jackson.core:jackson-databind:2.18.3")
 

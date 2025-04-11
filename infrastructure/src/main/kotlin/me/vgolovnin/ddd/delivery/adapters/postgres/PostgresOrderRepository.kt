@@ -1,6 +1,5 @@
 package me.vgolovnin.ddd.delivery.adapters.postgres
 
-import dev.ceviz.Mediator
 import kotlinx.coroutines.runBlocking
 import me.vgolovnin.ddd.delivery.core.domain.model.order.Order
 import me.vgolovnin.ddd.delivery.core.domain.model.order.OrderStatus
@@ -13,8 +12,8 @@ import kotlin.jvm.optionals.getOrNull
 @Repository
 internal class PostgresOrderRepository(
     private val jdbcOrderRepository: JdbcOrderRepository,
-    private val mediator: Mediator,
-    ) : OrderRepository {
+    private val outbox: Outbox,
+) : OrderRepository {
 
     override fun add(order: Order) {
         jdbcOrderRepository.save(
@@ -47,7 +46,7 @@ internal class PostgresOrderRepository(
     private fun Order.toRecord() = OrderRecord(id, location.x, location.y, status, courierId)
 
     private fun Order.publishEvents() = runBlocking {
-        events.forEach { mediator.send(it) }
+        events.forEach { outbox.send(it) }
         clearEvents()
     }
 }
